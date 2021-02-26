@@ -7,7 +7,7 @@ const config = require("config")
 const User = require("./models/User")
 const Role = require("./models/Role")
 
-const generateAccesToken = (id, roles) => {
+const generateAccessToken = (id, roles) => {
     const payload = {
         id,
         roles
@@ -71,7 +71,7 @@ class AuthController {
             return res.status(400).json({message: "Неверный пароль"})
         }
 
-        const token = generateAccesToken(user._id, user.roles)
+        const token = generateAccessToken(user._id, user.roles)
         return res.json({
             message: "Успешная авторизация",
             token,
