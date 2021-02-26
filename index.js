@@ -3,6 +3,7 @@ const config = require("config")
 const mongoose = require("mongoose")
 
 const authRouter = require("./authRoter")
+const corsMiddleware = require("./middleware/corsMiddleware")
 
 
 const PORT = config.get("serverPort") || 5000
@@ -10,6 +11,7 @@ const app = express()
 
 app.use(express.json())
 app.use("/", authRouter)
+app.use(corsMiddleware)
 
 const start = async () => {
     await mongoose.connect(config.get("dbUrl"))
