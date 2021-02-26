@@ -2,11 +2,14 @@ const express = require("express")
 const config = require("config")
 const mongoose = require("mongoose")
 
+const authRouter = require("./authRoter")
+
 
 const PORT = config.get("serverPort") || 5000
 const app = express()
 
 app.use(express.json())
+app.use("/", authRouter)
 
 const start = async () => {
     await mongoose.connect(config.get("dbUrl"))
