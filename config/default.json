@@ -1,6 +1,7 @@
 {
   "serverPort" : 5000,
   "dbUrl" : "mongodb+srv://admin:admin@cluster0.kznqd.mongodb.net/ad-auth?retryWrites=true&w=majority",
+  "secretKey" : "super-secret-key-mega-229",
 
   "roles" : [
     {

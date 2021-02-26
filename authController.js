@@ -1,7 +1,9 @@
 const mongoose = require("mongoose")
 const {validationResult} = require("express-validator")
-const User = require("./models/User")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
+
+const User = require("./models/User")
 
 class AuthController {
 
@@ -41,8 +43,25 @@ class AuthController {
         }
     }
 
-    async login() {
+    async login(req, res) {
+        const {username, password} = req.body
 
+        const user = await User.findOne({username})
+        if(!user) {
+            return res.status(400).json({message: "Логин не найден"})
+        }
+
+        const hashPassword = bcrypt.compareSync(password, user.password)
+        if(!hashPassword) {
+            return res.status(400).json({message: "Неверный пароль"})
+        }
+
+        const token = jwt.sign(user, config.get("secretKey", {expiresIn: '1h'}))
+        return res.json({
+            message: "Успешная авторизация",
+            token,
+            user
+        })
     }
 
     async getUser() {
