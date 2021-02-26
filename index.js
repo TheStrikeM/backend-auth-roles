@@ -18,7 +18,7 @@ const start = async () => {
         console.log(`* Сервер успешно запущен на порту ${PORT}`)
         console.log(`* Совершенно успешное подключение к MongoDB`)
         console.log(`* URL DB: ${config.get("dbUrl")}`)
-        console.log(`* Доступно по 127.0.0.1:${PORT}`)
+        console.log(`* Доступно по http://127.0.0.1:${PORT}`)
     })
 }
 

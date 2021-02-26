@@ -1,8 +1,9 @@
 const Router = require("express")
+const AuthController = require("./authController")
 
 const router = new Router()
 
-router.post('/reg', )
+router.post('/reg', AuthController.register)
 router.post('/login', )
 router.get('/user', )
 router.get('/users', )
