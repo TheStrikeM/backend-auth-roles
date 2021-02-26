@@ -9,8 +9,8 @@ const app = express()
 app.use(express.json())
 
 const start = async () => {
-
     await mongoose.connect(config.get("dbUrl"))
+
     app.listen(PORT, () => {
         console.log(`* Сервер успешно запущен на порту ${PORT}`)
         console.log(`* Совершенно успешное подключение к MongoDB`)
@@ -18,3 +18,5 @@ const start = async () => {
         console.log(`* Доступно по 127.0.0.1:${PORT}`)
     })
 }
+
+start()
