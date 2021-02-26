@@ -28,6 +28,7 @@ class AuthController {
             }
 
             const hashPassword = await bcrypt.hash(password, 4)
+
             const userRole = await Role.findOne({value: "USER"})
 
             const newUser = await new User({username, email, password: hashPassword, roles: [userRole.value]})
@@ -38,7 +39,10 @@ class AuthController {
                 user: {
                     username,
                     email,
-                    password
+                    password,
+                    roles: [
+                        userRole.value
+                    ]
                 }
             })
         } catch (e) {
