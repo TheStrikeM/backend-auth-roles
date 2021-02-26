@@ -13,7 +13,7 @@ router.post(
     ],
     AuthController.register)
 router.post('/login', AuthController.login)
-router.get('/user', )
+router.get('/user', AuthController.getUser)
 router.get('/users', )
 
 module.exports = router

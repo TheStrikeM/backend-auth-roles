@@ -7,6 +7,14 @@ const config = require("config")
 const User = require("./models/User")
 const Role = require("./models/Role")
 
+const generateAccesToken = (id, roles) => {
+    const payload = {
+        id,
+        roles
+    }
+    return jwt.sign(payload, config.get("secretKey"), {expiresIn: '1h'})
+}
+
 class AuthController {
 
     async register(req, res) {
@@ -63,7 +71,7 @@ class AuthController {
             return res.status(400).json({message: "Неверный пароль"})
         }
 
-        const token = jwt.sign({username, password}, config.get("secretKey", {expiresIn: '1h'}))
+        const token = generateAccesToken(user._id, user.roles)
         return res.json({
             message: "Успешная авторизация",
             token,
@@ -71,8 +79,8 @@ class AuthController {
         })
     }
 
-    async getUser() {
-
+    async getUser(req, res) {
+        return res.json({message: "Привет!"})
     }
 
     async getAll() {
