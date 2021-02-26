@@ -1,4 +1,13 @@
 {
   "serverPort" : 5000,
-  "dbUrl" : ""
+  "dbUrl" : "mongodb+srv://admin:admin@cluster0.kznqd.mongodb.net/ad-auth?retryWrites=true&w=majority",
+
+  "roles" : [
+    {
+      "value": "USER"
+    },
+    {
+      "value": "ADMIN"
+    }
+  ]
 }
