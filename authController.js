@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 const {validationResult} = require("express-validator")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const config = require("config")
 
 const User = require("./models/User")
 
@@ -56,7 +57,7 @@ class AuthController {
             return res.status(400).json({message: "Неверный пароль"})
         }
 
-        const token = jwt.sign(user, config.get("secretKey", {expiresIn: '1h'}))
+        const token = jwt.sign({username, password}, config.get("secretKey", {expiresIn: '1h'}))
         return res.json({
             message: "Успешная авторизация",
             token,

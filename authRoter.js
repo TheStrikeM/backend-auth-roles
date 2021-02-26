@@ -12,7 +12,7 @@ router.post(
         check("password", "Пароль должен состоять из 3 и не больше 15 символов").isLength({min: 3, max: 15})
     ],
     AuthController.register)
-router.post('/login', )
+router.post('/login', AuthController.login)
 router.get('/user', )
 router.get('/users', )
 
