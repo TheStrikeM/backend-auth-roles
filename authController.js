@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken")
 const config = require("config")
 
 const User = require("./models/User")
+const Role = require("./models/Role")
 
 class AuthController {
 
@@ -27,8 +28,9 @@ class AuthController {
             }
 
             const hashPassword = await bcrypt.hash(password, 4)
+            const userRole = await Role.findOne({value: "USER"})
 
-            const newUser = await new User({username, email, password: hashPassword})
+            const newUser = await new User({username, email, password: hashPassword, roles: [userRole.value]})
             await newUser.save()
 
             return res.json({
